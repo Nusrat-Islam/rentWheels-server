@@ -1,6 +1,6 @@
 const express = require('express')
 const cors = require('cors');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express()
 const port = 3000
 
@@ -41,7 +41,30 @@ app.get('/rents',async(req, res)=> {
   res.send(result)
 })
 
+//get
+app.get('/rents/:id',async(req,res) => {
+  const {id} =req.params
+  console.log(id)
+  const objectId = new ObjectId(id)
 
+  const result = await modelCollections.findOne({_id: objectId})
+
+  res.send({
+    success:true,
+    result
+  })
+})
+
+//post method
+app.post('/rents', async(req,res) => {
+     const data = req.body
+     console.log(data)
+    const result= await modelCollections.insertOne(data)
+    res.send({
+      success:true,
+    result
+    })
+})
 
  
     await client.db("admin").command({ ping: 1 });
