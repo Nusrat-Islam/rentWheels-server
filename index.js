@@ -1,8 +1,9 @@
 const express = require('express')
 const cors = require('cors');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
-const app = express()
-const port = 3000
+const app = express();
+const port = 3000;
+require("dotenv").config();
 
 app.use(cors())
 app.use(express.json())
@@ -11,7 +12,7 @@ app.use(express.json())
 
 
 //l2f1imIwDWth6sKy
-const uri = "mongodb+srv://rent-db:l2f1imIwDWth6sKy@cluster0.zpccury.mongodb.net/?appName=Cluster0";
+const uri =`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.zpccury.mongodb.net/?appName=Cluster0`;
 
 
 
@@ -28,7 +29,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
   
-    await client.connect();
+    // await client.connect();
 
 
   const db = client.db('rent-db')
@@ -175,7 +176,7 @@ app.get('/my-bookings', async (req, res) => {
 });
 
 
-    await client.db("admin").command({ ping: 1 });
+    // await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
