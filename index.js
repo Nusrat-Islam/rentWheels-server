@@ -130,20 +130,21 @@ app.get('/search', async(req,res) => {
 app.post('/bookings', async (req, res) => {
   const bookingData = req.body;
 
-  // 🔹 1. Check car exists
+  // Check car exists
   const car = await modelCollections.findOne({ _id: new ObjectId(bookingData.carId) });
   if (!car) {
     return res.status(404).send({ success: false, message: "Car not found" });
   }
 
-  // 🔹 2. Prevent double booking
+  // 2. Prevent double booking
   if (car.status === "unavailable") {
     return res.status(400).send({ success: false, message: "Car already booked" });
   }
 
-  // 🔹 3. Save booking
+  // 3. Save booking
   const bookingResult = await bookingCollection.insertOne({
     ...bookingData,
+        name: bookingData.name || car.name,
     bookingDate: new Date(),
     status: "confirmed"
   });
@@ -154,7 +155,7 @@ app.post('/bookings', async (req, res) => {
     { $set: { status: 'unavailable' } }
   );
 
-  // 🔹 5. Send both results
+  // 5. Send both results
   res.send({
     success: true,
     booking: bookingResult,
@@ -162,6 +163,16 @@ app.post('/bookings', async (req, res) => {
   });
 });
 
+// Get bookings for a specific user
+app.get('/my-bookings', async (req, res) => {
+    const email =req.query.email
+    const result = await bookingCollection.find({userEmail: email}).toArray()
+
+    res.send({
+      result
+    })
+   
+});
 
 
     await client.db("admin").command({ ping: 1 });
