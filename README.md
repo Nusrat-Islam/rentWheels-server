@@ -73,8 +73,8 @@ npm install
 2. Set up environment variables by creating a `.env` file in the root directory:
 
 ```env
-DATABASE_URL=your_database_url
-JWT_SECRET=your_jwt_secret
+DATABASE_URL=`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.zpccury.mongodb.net/?appName=Cluster0`;
+
 ```
 
 3. Run the application:
@@ -99,35 +99,10 @@ your-project/
 └── package.json
 ```
 
----
-
-## Contributions (Optional)
-If this is a team project, mention contributors.
-
-| Name            | Role                | Contributions                            |  
-|-----------------|---------------------|------------------------------------------|  
-| Member-1        | Role                | Contributions                            |  
-| Member-2        | Role                | Contributions                            |  
-
----
-
-## How to Contribute (Optional)
-
-  - Fork the Project
-  - Create a branch (`git checkout -b feature/AmazingFeature`)
-  - Commit changes (`git commit -m 'Add some AmazingFeature'`)
-  - Push the branch (`git push origin feature/AmazingFeature`)
-  - Open a Pull Request
-
----
-
-## License (Optional)
-Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ---
 
 ## Contact
 
-**Live URL:** [Live Site](https://yourdomain.com/)
-**Email:** [username](your-email@example.com)
-**Portfolio:** [Portfolio](https://yourportfolio.com)
+
+**Email:** [Nusrat-Islam](nishinusrat395@gmail.com)
